@@ -87,35 +87,41 @@ function ItemSearch() {
                     <All.Col></All.Col>
                     <All.Col></All.Col>
                     <All.Col>
-                      <All.Card.Header className="text-center">
-                        {el.movieName}
-                      </All.Card.Header>
-                      <All.Accordion.Item eventKey={idx}>
-                        <All.Accordion.Header>
-                          <All.Image src={el.poster} rounded />
-                        </All.Accordion.Header>
-                        <All.Accordion.Body>
-                          <p>Watch it on: {el.placersToWatch + " "}</p>
-                          <p>Year: {el.year}</p>
-
-                          {el.rated !== "N/A" && <p>{"Rated: " + el.rated}</p>}
-                          {el.runtime !== "N/A" && (
-                            <p>{"Runtime: " + el.runtime}</p>
-                          )}
-                          {el.imdbRating !== "N/A" && (
-                            <p>{"Rating: " + el.imdbRating}</p>
-                          )}
-                          {el.boxOffices != null && (
-                            <p>{"Box Office Sales: " + el.boxOffices}</p>
-                          )}
-                          <All.Button
-                            target="_blank"
-                            href={"https://www.imdb.com/title/" + el.id}
-                          >
-                            Link to IMDB
-                          </All.Button>
-                        </All.Accordion.Body>
-                      </All.Accordion.Item>
+                      <All.Card>
+                        <All.Card.Header className="text-center">
+                          <h5>{el.movieName}</h5>
+                        </All.Card.Header>
+                        <All.Accordion.Item eventKey={idx}>
+                          <All.Accordion.Header>
+                            <All.Image src={el.poster} rounded />
+                          </All.Accordion.Header>
+                          <All.Accordion.Body>
+                            <p>
+                              Watch it on:{" "}
+                              <span>{el.placersToWatch + " "}</span>
+                            </p>
+                            <p>Year: {el.year}</p>
+                            {el.rated !== "N/A" && (
+                              <p>{"Rated: " + el.rated}</p>
+                            )}
+                            {el.runtime !== "N/A" && (
+                              <p>{"Runtime: " + el.runtime}</p>
+                            )}
+                            {el.imdbRating !== "N/A" && (
+                              <p>{"Rating: " + el.imdbRating}</p>
+                            )}
+                            {el.boxOffices != null && (
+                              <p>{"Box Office Sales: " + el.boxOffices}</p>
+                            )}
+                            <All.Button
+                              target="_blank"
+                              href={"https://www.imdb.com/title/" + el.id}
+                            >
+                              Link to IMDB
+                            </All.Button>
+                          </All.Accordion.Body>
+                        </All.Accordion.Item>
+                      </All.Card>
                       <hr />
                     </All.Col>
                     <All.Col></All.Col>
