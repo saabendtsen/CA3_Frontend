@@ -71,9 +71,6 @@ const AdminManager = () => {
           </div>
         </div>
       </form>
-      <p>Please provide me with the ability to create new persons</p>
-      <p>And update the backend when submitted</p>
-      <p>{JSON.stringify(newUser)}</p>
     </div>
   );
 };

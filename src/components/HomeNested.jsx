@@ -1,7 +1,7 @@
 import React from "react";
 
 const HomeNested = () => {
-  return <p>Home</p>;
+  return <div>Home</div>;
 };
 
 export default HomeNested;
