@@ -60,11 +60,3 @@ const Header = (props) => {
     </ul>
   );
 };
-
-function Home() {
-  return (
-    <div>
-      <HomeNested />
-    </div>
-  );
-}

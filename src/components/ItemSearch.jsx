@@ -87,6 +87,9 @@ function ItemSearch() {
                     <All.Col></All.Col>
                     <All.Col></All.Col>
                     <All.Col>
+                      <All.Card.Header className="text-center">
+                        {el.movieName}
+                      </All.Card.Header>
                       <All.Accordion.Item eventKey={idx}>
                         <All.Accordion.Header>
                           <All.Image src={el.poster} rounded />
