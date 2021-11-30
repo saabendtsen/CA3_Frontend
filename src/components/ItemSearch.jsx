@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as All from "react-bootstrap";
-import { MovieTitle } from "./Urls";
+import { Server_URL, MovieTitle } from "./Urls";
 
 function ItemSearch() {
   const [loadingScreen, setLoadingScreen] = useState(false);
@@ -22,7 +22,7 @@ function ItemSearch() {
   function getsearchdata() {
     if (movieName != null) {
       setDataReady(false);
-      fetch(MovieTitle + movieName.SearchItem)
+      fetch(Server_URL + MovieTitle + movieName.SearchItem)
         .then((res) => {
           if (res.ok) {
             return res.json();
