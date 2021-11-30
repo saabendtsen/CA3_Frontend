@@ -1,5 +1,5 @@
-const Server_URL = "http://localhost:8080/CA3";
+const Server_URL = "https://shitlord.me/CA3";
 
-const MovieTitle = "http://localhost:8080/CA3/api/movie/title/";
+const MovieTitle = "/api/movie/title/";
 
 export { Server_URL, MovieTitle };
