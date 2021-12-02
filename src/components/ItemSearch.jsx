@@ -15,6 +15,10 @@ function ItemSearch() {
     getsearchdata();
   };
 
+  const handleClick = (evt) => {
+    evt.preventDefault();
+  };
+
   const onNameChange = (evt) => {
     setMovieName({ ...movieName, [evt.target.id]: evt.target.value });
   };

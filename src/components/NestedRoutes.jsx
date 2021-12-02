@@ -9,6 +9,7 @@ import {
 import HomeNested from "./HomeNested";
 import AdminManger from "./AdminManager";
 import ItemSearch from "./ItemSearch";
+import WatchLater from "./WatchLater";
 
 export default function Nesting(props) {
   let userrole = props.userrole;
@@ -23,6 +24,9 @@ export default function Nesting(props) {
             </Route>
             <Route exact path="/search">
               <ItemSearch />
+            </Route>
+            <Route exact path="/watchlist">
+              <WatchLater />
             </Route>
             {userrole === "admin" && (
               <Route path="/admin">
@@ -48,6 +52,11 @@ const Header = (props) => {
       <li>
         <NavLink exact activeClassName="selected" to="/search">
           Movie/Series Search
+        </NavLink>
+      </li>
+      <li>
+        <NavLink exact activeClassName="selected" to="/watchlist">
+          Your Watch List
         </NavLink>
       </li>
       {userrole === "admin" && (
