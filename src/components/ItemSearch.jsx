@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import * as All from "react-bootstrap";
-import { MovieTitle } from "./Urls";
+import { MovieTitle, WatchLaterList } from "./Urls";
 
 function ItemSearch() {
   const [loadingScreen, setLoadingScreen] = useState(false);
   const [isDataReady, setDataReady] = useState(false);
   const [item, setItem] = useState([]);
   const [movieName, setMovieName] = useState();
+  const [confirmation, setConfirmed] = useState();
   const [error, setError] = useState(null);
 
   const handleSubmit = (evt) => {
@@ -17,6 +18,7 @@ function ItemSearch() {
 
   const handleClick = (evt) => {
     evt.preventDefault();
+    addToWatchList(evt);
   };
 
   const onNameChange = (evt) => {
@@ -65,6 +67,38 @@ function ItemSearch() {
       setDataReady(false);
     }
   }
+
+  function addToWatchList(evt) {
+    if (evt.target.value != null) {
+      const options = makeOptions("POST", true);
+      fetch(WatchLaterList + evt.target.value, options)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .catch((error) => {
+          setError(error);
+        });
+      setConfirmed("Added to your list!");
+    } else {
+      setError("No IMDB ID added yet!");
+    }
+  }
+
+  const makeOptions = (method, body) => {
+    var opts = {
+      method: method,
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    if (body) {
+      opts.body = JSON.stringify(body);
+    }
+    return opts;
+  };
 
   if (loadingScreen) {
     return (
@@ -119,7 +153,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[0].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[0].id}
+                          value={item[0].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
@@ -137,6 +191,19 @@ function ItemSearch() {
                       </All.Accordion.Header>
                       <All.Accordion.Body>
                         <p>
+                          {error != null && (
+                            <All.Toast
+                              className="d-inline-block m-1"
+                              bg="danger"
+                            >
+                              <All.Toast.Body>
+                                <strong className="me-auto">
+                                  Player not found or account doesn't have Apex
+                                  registered, Please try again
+                                </strong>
+                              </All.Toast.Body>
+                            </All.Toast>
+                          )}
                           Watch it on:{" "}
                           <span>{item[1].placersToWatch + " "}</span>
                         </p>
@@ -158,7 +225,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[1].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[1].id}
+                          value={item[1].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
@@ -197,7 +284,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[2].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[2].id}
+                          value={item[2].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
@@ -239,7 +346,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[3].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[3].id}
+                          value={item[3].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
@@ -278,7 +405,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[4].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[4].id}
+                          value={item[4].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
@@ -317,7 +464,27 @@ function ItemSearch() {
                           href={"https://www.imdb.com/title/" + item[5].id}
                         >
                           Link to IMDB
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="success"
+                          id={item[5].id}
+                          value={item[5].id}
+                          onClick={handleClick}
+                        >
+                          Add to My Watch List
                         </All.Button>
+                        {confirmation != null && (
+                          <All.Toast
+                            className="d-inline-block m-1"
+                            bg="success"
+                          >
+                            <All.Toast.Body>
+                              <strong className="me-auto">
+                                {confirmation}
+                              </strong>
+                            </All.Toast.Body>
+                          </All.Toast>
+                        )}
                       </All.Accordion.Body>
                     </All.Accordion.Item>
                   </All.Card>
