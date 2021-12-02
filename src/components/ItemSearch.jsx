@@ -84,8 +84,6 @@ function ItemSearch() {
               <All.Accordion>
                 <All.Container fluid>
                   <All.Row>
-                    <All.Col></All.Col>
-                    <All.Col></All.Col>
                     <All.Col>
                       <All.Card>
                         <All.Card.Header className="text-center">
@@ -124,8 +122,6 @@ function ItemSearch() {
                       </All.Card>
                       <hr />
                     </All.Col>
-                    <All.Col></All.Col>
-                    <All.Col></All.Col>
                   </All.Row>
                 </All.Container>
               </All.Accordion>
