@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as All from "react-bootstrap";
-import { MovieTitle, WatchLaterList } from "./Urls";
+import { MovieTitle, MovieWatchLater, MovieLikes } from "./Urls";
+import facade from "../apiFacade";
 
 function ItemSearch() {
   const [loadingScreen, setLoadingScreen] = useState(false);
@@ -19,6 +20,11 @@ function ItemSearch() {
   const handleClick = (evt) => {
     evt.preventDefault();
     addToWatchList(evt);
+  };
+
+  const handleLike = (evt) => {
+    evt.preventDefault();
+    addLike(evt);
   };
 
   const onNameChange = (evt) => {
@@ -70,8 +76,8 @@ function ItemSearch() {
 
   function addToWatchList(evt) {
     if (evt.target.value != null) {
-      const options = makeOptions("POST", true);
-      fetch(WatchLaterList + evt.target.value, options)
+      const options = facade.makeOptions("POST", true);
+      fetch(MovieWatchLater + evt.target.value, options)
         .then((res) => {
           if (res.ok) {
             return res.json();
@@ -86,19 +92,22 @@ function ItemSearch() {
     }
   }
 
-  const makeOptions = (method, body) => {
-    var opts = {
-      method: method,
-      headers: {
-        "Content-type": "application/json",
-        Accept: "application/json",
-      },
-    };
-    if (body) {
-      opts.body = JSON.stringify(body);
+  function addLike(evt) {
+    if (evt.target.value != null) {
+      const options = facade.makeOptions("POST", true);
+      fetch(MovieLikes + evt.target.value, options)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .catch((error) => {
+          setError(error);
+        });
+    } else {
+      setError("No Movie Liked yet!");
     }
-    return opts;
-  };
+  }
 
   if (loadingScreen) {
     return (
@@ -161,6 +170,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[0].id}
+                          value={item[0].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast
@@ -233,6 +250,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[1].id}
+                          value={item[1].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast
@@ -292,6 +317,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[2].id}
+                          value={item[2].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast
@@ -354,6 +387,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[3].id}
+                          value={item[3].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast
@@ -413,6 +454,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[4].id}
+                          value={item[4].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast
@@ -472,6 +521,14 @@ function ItemSearch() {
                           onClick={handleClick}
                         >
                           Add to My Watch List
+                        </All.Button>{" "}
+                        <All.Button
+                          variant="warning"
+                          id={item[5].id}
+                          value={item[5].id}
+                          onClick={handleLike}
+                        >
+                          Add Like
                         </All.Button>
                         {confirmation != null && (
                           <All.Toast

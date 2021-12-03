@@ -4,6 +4,8 @@ const Server_URL = "http://localhost:8080/CA3";
 
 const MovieTitle = Server_URL + "/api/movie/title/";
 
-const WatchLaterList = Server_URL + "/api/movie/watchLater/";
+const MovieWatchLater = Server_URL + "/api/movie/watchlater/";
 
-export { Server_URL, MovieTitle, WatchLaterList };
+const MovieLikes = Server_URL + "/api/movie/like/";
+
+export { Server_URL, MovieTitle, MovieWatchLater, MovieLikes };
