@@ -1,4 +1,4 @@
-// const Server_URL = "https://manlyman69.rocks/CA3";
+//const Server_URL = "https://manlyman69.rocks/CA3";
 
 const Server_URL = "http://localhost:8080/CA3";
 

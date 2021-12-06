@@ -2,7 +2,10 @@ import jwt_decode from "jwt-decode";
 import { Server_URL } from "./components/Urls";
 function handleHttpErrors(res) {
   if (!res.ok) {
-    return Promise.reject({ status: res.status, fullError: res.json() });
+    return Promise.reject({
+      status: res.status,
+      fullError: res.json(),
+    });
   }
   return res.json();
 }
@@ -28,16 +31,14 @@ function apiFacade() {
     localStorage.removeItem("jwtToken");
   };
 
-  const login = (user, password) => {
+  const login = async (user, password) => {
     const options = makeOptions("POST", true, {
       username: user,
       password: password,
     });
-    return fetch(Server_URL + "/api/login", options)
-      .then(handleHttpErrors)
-      .then((res) => {
-        setToken(res.token);
-      });
+    const res = await fetch(Server_URL + "/api/login", options);
+    const res_1 = await handleHttpErrors(res);
+    setToken(res_1.token);
   };
 
   const fetchData = async () => {
@@ -71,7 +72,7 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    handleHttpErrors
+    handleHttpErrors,
   };
 }
 const facade = apiFacade();
