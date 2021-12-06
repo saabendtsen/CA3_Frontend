@@ -131,12 +131,9 @@ function App() {
     setUsername("Anonymous");
   };
   const login = (user, pass) => {
-    if (facade.login(user, pass)) {
-      facade
-        .login(user, pass)
-        .then((res) => setLoggedIn(true), setUsername(user));
-    } else {
-    }
+    facade
+      .login(user, pass)
+      .then((res) => setLoggedIn(true), setUsername(user));
   };
 
   return (

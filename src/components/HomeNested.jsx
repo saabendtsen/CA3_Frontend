@@ -47,7 +47,7 @@ const HomeNested = () => {
           setError(error);
         });
     } else {
-      setError("No Movie Liked yet!");
+      setError("No Movies Liked yet!");
     }
   }
 
