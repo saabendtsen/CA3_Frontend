@@ -41,7 +41,7 @@ function LogIn({ login }) {
       username: user,
       password: password,
     });
-    const res = await fetch(Server_URL + "/api/info/createUser", options);
+    const res = await fetch(Server_URL + "/api/info/createuser", options);
     if (!res.ok) {
       setError("user/password already exists!");
     }

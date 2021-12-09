@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import facade from "../apiFacade";
 import { Server_URL } from "./Urls";
 import {
@@ -6,11 +6,8 @@ import {
   Container,
   ButtonGroup,
   Button,
-  Modal,
   Form,
-  InputGroup,
-  Toast,
-  FormControl,
+  Modal,
 } from "react-bootstrap";
 
 function handleHttpErrors(res) {
@@ -25,25 +22,23 @@ const AdminManager = () => {
   const [item, setItem] = useState([]);
   const [dataReady, setDataReady] = useState(false);
   const [error, setError] = useState(null);
-  const [formShow, setFormShow] = useState(false);
   const [currentuser, setCurrentUser] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    let name = document.getElementById("username").innerHTML;
-    let pass = document.getElementById("password").innerHTML;
-    console.log(name + " " + pass);
     const options = facade.makeOptions("PUT", true, newUser);
-    fetch(Server_URL + "/api/info/admin/edituser", options).then((res) =>
+    fetch(Server_URL + "/api/info/edituser", options).then((res) =>
       handleHttpErrors(res)
     );
     setCurrentUser(null);
+    setShow(false);
   };
 
   const handleonChange = (evt) => {
-    setNewUser({ ...newUser, [evt.target.id]: evt.target.value });
-
-    console.log(newUser);
+    setNewUser({ username: currentuser, password: evt.target.value });
   };
 
   const handleDelete = (evt) => {
@@ -59,7 +54,7 @@ const AdminManager = () => {
   const handleEdit = (evt) => {
     evt.preventDefault();
     setCurrentUser(evt.target.value);
-    setFormShow(true);
+    setShow(true);
   };
 
   function getdata() {
@@ -73,7 +68,6 @@ const AdminManager = () => {
         })
         .then((result) => {
           setItem(result);
-          console.log(item);
           setDataReady(true);
         })
         .catch((error) => {
@@ -86,21 +80,26 @@ const AdminManager = () => {
   if (dataReady) {
     return (
       <div>
-        <Form onSubmit={handleSubmit} onChange={handleonChange}>
-          <Form.Group className="mb-3" id="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder={currentuser} disabled />
-          </Form.Group>
-          <Form.Group className="mb-3" id="password">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Change User Details
-          </Button>
-        </Form>
-        {JSON.stringify(newUser)}
         <Container className="text-center">
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Change User Details</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form onSubmit={handleSubmit} onChange={handleonChange}>
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder={currentuser} disabled />
+                <Form.Group className="mb-3" id="password">
+                  <Form.Label>New Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Change User Details
+                </Button>
+              </Form>
+            </Modal.Body>
+          </Modal>
+
           <br />
           <h3>User List</h3>
           <hr />
