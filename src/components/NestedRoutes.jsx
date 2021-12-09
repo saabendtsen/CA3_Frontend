@@ -13,24 +13,31 @@ import WatchLater from "./WatchLater";
 
 export default function Nesting(props) {
   let userrole = props.userrole;
+  console.log(userrole);
   return (
     <Router>
       <div>
         <Header userrole={userrole} />
         <div className="content">
           <Switch>
-            <Route exact path="/">
-              <HomeNested />
-            </Route>
-            <Route exact path="/search">
-              <ItemSearch />
-            </Route>
-            <Route exact path="/watchlist">
-              <WatchLater />
-            </Route>
             {userrole === "admin" && (
-              <Route path="/admin">
+              <Route path="/">
                 <AdminManger />
+              </Route>
+            )}
+            {userrole === "user" && (
+              <Route exact path="/">
+                <HomeNested />
+              </Route>
+            )}
+            {userrole === "user" && (
+              <Route exact path="/search">
+                <ItemSearch />
+              </Route>
+            )}
+            {userrole === "user" && (
+              <Route exact path="/watchlist">
+                <WatchLater />
               </Route>
             )}
           </Switch>
@@ -44,25 +51,31 @@ const Header = (props) => {
   let userrole = props.userrole;
   return (
     <ul className="header">
-      <li>
-        <NavLink exact activeClassName="selected" to="/">
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="selected" to="/search">
-          Movie/Series Search
-        </NavLink>
-      </li>
-      <li>
-        <NavLink exact activeClassName="selected" to="/watchlist">
-          Your Watch List
-        </NavLink>
-      </li>
+      {userrole === "user" && (
+        <li>
+          <NavLink exact activeClassName="selected" to="/">
+            Home
+          </NavLink>
+        </li>
+      )}
+      {userrole === "user" && (
+        <li>
+          <NavLink exact activeClassName="selected" to="/search">
+            Movie/Series Search
+          </NavLink>
+        </li>
+      )}
+      {userrole === "user" && (
+        <li>
+          <NavLink exact activeClassName="selected" to="/watchlist">
+            Your Watch List
+          </NavLink>
+        </li>
+      )}
       {userrole === "admin" && (
         <li>
-          <NavLink activeClassName="selected" to="/admin">
-            Admin
+          <NavLink activeClassName="selected" to="/">
+            Change user details
           </NavLink>
         </li>
       )}
